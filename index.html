@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>移動予約確認アプリ - Togo</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -47,6 +49,10 @@
                 </button>
             </section>
         </main>
+
+        <footer class="app-footer">
+            <p>&copy; t0rixs All rights reserved.</p>
+        </footer>
     </div>
 
     <!-- Todo追加モーダル -->
@@ -202,7 +208,7 @@
             </div>
             <form id="editTodoForm">
                 <input type="hidden" id="editTodoId" name="editTodoId">
-                
+
                 <div class="form-group">
                     <label for="editTransportType">交通手段</label>
                     <select id="editTransportType" name="transportType" required>
@@ -355,11 +361,11 @@
             </div>
             <form id="urlForm">
                 <input type="hidden" id="urlTodoId" name="todoId">
-                
+
                 <div class="form-group">
                     <label for="reservationUrl">予約確認URL</label>
-                    <input type="url" id="reservationUrl" name="reservationUrl" 
-                           placeholder="https://example.com/reservation/12345" required>
+                    <input type="url" id="reservationUrl" name="reservationUrl"
+                        placeholder="https://example.com/reservation/12345" required>
                     <small class="form-help">予約確認ページのURLを入力してください</small>
                 </div>
 
@@ -380,11 +386,11 @@
             </div>
             <div class="date-dial-container">
                 <input type="hidden" id="dateDialTodoId" name="todoId">
-                
+
                 <div class="current-date-display">
                     <span id="currentDateDisplay">2024年12月10日</span>
                 </div>
-                
+
                 <div class="dial-controls">
                     <div class="dial-group">
                         <label>年</label>
@@ -394,7 +400,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="dial-group">
                         <label>月</label>
                         <div class="dial-wrapper">
@@ -403,7 +409,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="dial-group">
                         <label>日</label>
                         <div class="dial-wrapper">
@@ -441,4 +447,5 @@
 
     <script src="js.js"></script>
 </body>
+
 </html>
