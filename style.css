@@ -1,0 +1,1976 @@
+/* 基本的なリセットとフォント設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* カラーパレット */
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-gray: #f8f9fa;
+    --medium-gray: #6c757d;
+    --dark-gray: #343a40;
+    --border-color: #e1e5e9;
+    
+    /* シャドウ */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.2);
+    
+    /* ボーダー半径 */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    
+    /* スペーシング */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', 'Meiryo', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-gray);
+    background: var(--primary-gradient);
+    min-height: 100vh;
+    padding: var(--spacing-lg);
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+/* ヘッダー */
+header {
+    background: var(--primary-gradient);
+    color: white;
+    padding: var(--spacing-2xl);
+    text-align: center;
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* メインコンテンツ */
+main {
+    padding: var(--spacing-2xl);
+}
+
+/* Todo追加セクション */
+.add-todo-section {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.add-todo-btn {
+    background: var(--primary-gradient);
+    color: white;
+    border: none !important;
+    outline: none !important;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.add-todo-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3), var(--shadow-md);
+}
+
+.add-todo-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.add-todo-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.add-todo-btn:hover::before {
+    left: 100%;
+}
+
+/* 今日の予約URL表示セクション */
+.today-url-section {
+    margin-bottom: var(--spacing-2xl);
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.today-url-container {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border: 3px solid transparent;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+    animation: glowBorder 2s ease-in-out infinite alternate;
+}
+
+.today-url-container::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, 
+        #667eea, #764ba2, #667eea, #ffd700, #667eea, #764ba2);
+    background-size: 400% 400%;
+    border-radius: var(--radius-lg);
+    z-index: -1;
+    animation: gradientShift 3s ease infinite;
+}
+
+.today-url-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    border-radius: var(--radius-lg);
+    z-index: -1;
+}
+
+.today-url-container h3 {
+    margin: 0 0 var(--spacing-md) 0;
+    color: var(--primary-color);
+    font-size: 1.3em;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.today-url-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.today-url-item {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.today-url-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.today-url-info {
+    flex: 1;
+    text-align: left;
+    min-width: 200px;
+}
+
+.today-url-route {
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.95em;
+}
+
+.today-url-transport {
+    font-size: 0.85em;
+    color: var(--medium-gray);
+}
+
+.today-url-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: var(--primary-gradient);
+    color: white;
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.today-url-link:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+    color: white;
+    text-decoration: none;
+}
+
+.today-url-link:visited {
+    color: white;
+}
+
+/* 警告表示 */
+.today-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: 0.9em;
+    font-weight: 600;
+    animation: warningPulse 2s ease-in-out infinite;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.today-warning-icon {
+    font-size: 1.1em;
+    animation: warningShake 1s ease-in-out infinite;
+}
+
+/* 未予約アイテムの特別スタイル */
+.today-url-item.not-reserved {
+    border-left-color: #ff6b6b;
+    background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+}
+
+.today-url-item.not-reserved:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+}
+
+/* 予約済みアイテムの特別スタイル */
+.today-url-item.reserved {
+    border-left-color: var(--success-color);
+    background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+}
+
+/* 警告アニメーション */
+@keyframes warningPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes warningShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    75% {
+        transform: translateX(2px);
+    }
+}
+
+/* 光るアニメーション */
+@keyframes glowBorder {
+    0% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 40px rgba(102, 126, 234, 0.6), 
+                    0 0 60px rgba(118, 75, 162, 0.3);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+.modal-header {
+    background: var(--primary-gradient);
+    color: white;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    line-height: 1;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.modal form {
+    padding: var(--spacing-xl);
+}
+
+/* フォーム要素 */
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--dark-gray);
+    font-size: 0.95em;
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-help {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 0.85em;
+    color: var(--medium-gray);
+    font-style: italic;
+}
+
+/* 日付入力グループ */
+.date-input-group {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: stretch;
+}
+
+.date-input-group input[type="date"] {
+    flex: 1;
+}
+
+.dial-select-btn {
+    background: var(--primary-gradient);
+    color: white;
+    border: none !important;
+    outline: none !important;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    box-shadow: var(--shadow-sm);
+}
+
+.dial-select-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.dial-select-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3), var(--shadow-sm);
+}
+
+.dial-select-btn:active {
+    transform: translateY(0);
+}
+
+/* チェックボックス */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--dark-gray);
+    gap: var(--spacing-sm);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+/* ボタン */
+.btn {
+    border: none !important;
+    outline: none !important;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:focus {
+    outline: none !important;
+    border: none !important;
+}
+
+.register-btn {
+    background: var(--primary-gradient);
+    color: white;
+    flex: 1;
+    border-radius: var(--radius-lg);
+    border: none !important;
+    outline: none !important;
+    padding: calc(var(--spacing-md) * 1.25) var(--spacing-lg);
+    font-size: 16px;
+    font-weight: 600;
+    min-height: 30px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.register-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.cancel-btn {
+    background: linear-gradient(135deg, var(--medium-gray) 0%, #5a6268 100%);
+    color: white;
+    flex: 1;
+    border-radius: var(--radius-lg);
+    border: none !important;
+    outline: none !important;
+}
+
+.cancel-btn:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #495057 100%);
+    transform: translateY(-2px);
+}
+
+.cancel-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.3);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #c82333 100%);
+    color: white;
+    flex: 0 0 auto;
+    min-width: 100px;
+    border-radius: var(--radius-lg);
+    border: none !important;
+    outline: none !important;
+    padding: calc(var(--spacing-md) * 1.25) var(--spacing-lg);
+    font-size: 16px;
+    font-weight: 600;
+    min-height: 30px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    transform: translateY(-2px);
+}
+
+.delete-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, var(--success-color) 0%, #218838 100%);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.edit-btn:hover {
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.edit-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+}
+
+/* モーダルアクション */
+.modal-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+/* Todo一覧セクション */
+.todo-list {
+    background: var(--light-gray);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+
+#todoContainer {
+    position: relative;
+}
+
+.no-todos {
+    text-align: center;
+    color: var(--medium-gray);
+    font-style: italic;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    background: white;
+    border-radius: var(--radius-md);
+    border: 2px dashed var(--border-color);
+}
+
+/* Todo項目 */
+.todo-item,
+.todo-item-connection {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    margin-left: 95px; /* 等間隔調整: 15px + 65px + 15px */ 
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--primary-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: visible; /* 日付バッジを表示するため */
+}
+
+.todo-item-connection {
+    margin-bottom: 0;
+}
+
+/* 最後のTodoアイテムのマージンを0に */
+.todo-item:last-child,
+.todo-item-connection:last-child {
+    margin-bottom: 0;
+}
+
+.todo-item:hover,
+.todo-item-connection:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* 枠外日付表示 - カレンダー風デザイン */
+.todo-date-external {
+    position: absolute;
+    left: -100px; /* 等間隔調整: -(15px + 65px) */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 65px;
+    height: 70px;
+    background: white;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: var(--shadow-md);
+    border: 2px solid #e1e5e9;
+    z-index: 10;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.todo-date-external:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.date-month {
+    background: var(--primary-gradient);
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.date-day {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-gray);
+    font-size: 22px;
+    font-weight: 700;
+    background: white;
+    width: 100%;
+}
+
+/* 交通手段別カラー */
+.transport-airplane {
+    border-left-color: #007bff;
+}
+
+.transport-bus {
+    border-left-color: var(--success-color);
+}
+
+/* Todo項目の内容 */
+.todo-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
+.todo-details-location {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: var(--radius-sm);
+}
+
+.todo-details-location > div {
+    background: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    color: var(--dark-gray);
+    box-shadow: var(--shadow-sm);
+    min-width: 80px;
+    text-align: center;
+}
+
+.todo-arrow {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.todo-details-datetime {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.todo-detail {
+    background: #ffffff;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-detail strong {
+    color: var(--medium-gray);
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.todo-detail span {
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+
+
+/* Todo アクション */
+.todo-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+/* デスクトップでのaction-rowは横並び */
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: var(--spacing-md);
+}
+
+.action-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.action-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+/* インライン警告 */
+.warning-inline {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 600;
+    animation: warningPulse 2s ease-in-out infinite;
+    white-space: nowrap;
+}
+
+
+
+.warning-icon {
+    font-size: 14px;
+    animation: warningShake 1s ease-in-out infinite;
+}
+
+.warning-text {
+    font-size: 11px;
+}
+
+.status-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+/* ステータステキスト */
+.status-text {
+    font-size: 12px;
+    font-weight: 600;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid;
+    transition: all 0.3s ease;
+}
+
+.status-text.not-reserved {
+    color: var(--medium-gray);
+    background: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+.status-text.reserved {
+    color: #155724;
+    background: #d4edda;
+    border-color: #c3e6cb;
+}
+
+/* ステータスライト */
+.status-light {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.light-inner {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* 未予約状態（グレー） */
+.status-light.not-reserved {
+    background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+    border-color: #bbb;
+}
+
+.status-light.not-reserved .light-inner {
+    background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 予約済み状態（緑） */
+.status-light.reserved {
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    border-color: #2e7d30;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status-light.reserved .light-inner {
+    background: linear-gradient(145deg, #66BB6A, #4CAF50);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* 点滅効果 */
+.status-light.reserved::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ホバー効果 */
+.status-light:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.4);
+}
+
+.status-light.reserved:hover {
+    box-shadow: 0 0 30px rgba(76, 175, 80, 0.6), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Todo間の接続 */
+.todo-connection {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: var(--spacing-md);
+    margin-left: 95px; /* todo-itemと同じ左マージン */
+    width: calc(100% - 95px); /* todo-itemと同じ有効幅 */
+    overflow: visible; /* 境界線を表示するため */
+}
+
+/* 接続内の境界線（背景） */
+.todo-connection .boundary-line-background {
+    position: absolute;
+    top: 50%;
+    left: -120px; /* todo-itemの左端まで */
+    width: calc(100% + 95px + var(--spacing-2xl)); /* 全幅に拡張 */
+    height: 2px;
+    background: repeating-linear-gradient(
+        to right,
+        var(--medium-gray) 0px,
+        var(--medium-gray) 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    opacity: 0.5;
+    z-index: 1; /* connection-lineより後ろ */
+    transform: translateY(-50%);
+}
+
+/* 接続内の境界ラベル */
+.todo-connection .boundary-label {
+    position: absolute;
+    top: 50%;
+    left: -95px; /* 左端から開始 */
+    transform: translateY(calc(-100% - 4px)); /* 点線の直上に配置 */
+    background: transparent; /* 背景を透明に */
+    padding: 0; /* パディングを削除 */
+    border-radius: 0; /* 角丸を削除 */
+    z-index: 3; /* connection-infoより前 */
+    box-shadow: none; /* シャドウを削除 */
+}
+
+.connection-line {
+    width: 4px;
+    height: 80px;
+    background: var(--primary-gradient);
+    position: relative;
+    border-radius: 2px;
+    box-shadow: var(--shadow-sm);
+    z-index: 2; /* 境界線の前、ラベルの後ろ */
+}
+
+.connection-line::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid var(--secondary-color);
+}
+
+.connection-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 2px solid var(--primary-color);
+    text-align: center;
+    min-width: 140px;
+    z-index: 4; /* 境界ラベルより前 */
+}
+
+.stay-location {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.85em;
+    margin-bottom: 2px;
+}
+
+/* デスクトップではフルテキスト表示、スマホ表示用は非表示 */
+.stay-location .mobile-shown {
+    display: none;
+}
+
+.stay-location .mobile-hidden {
+    display: inline-block;
+}
+
+.stay-duration {
+    font-weight: 500;
+    color: var(--dark-gray);
+    font-size: 0.75em;
+}
+
+/* デスクトップでは内部日付表示を非表示 */
+.todo-date-internal {
+    display: none;
+}
+
+/* デスクトップではaction-rightの警告を非表示 */
+.action-right .warning-inline {
+    display: none;
+}
+
+/* Todo間の期間境界線（独立表示用） */
+.time-boundary {
+    position: relative;
+    height: 80px; /* .connection-lineと同じ高さ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0; /* マージンを削除 */
+    padding: 0; /* パディングを削除 */
+    margin-left: 95px; /* todo-itemと同じ左マージン */
+    width: calc(100% - 95px); /* todo-itemと同じ有効幅 */
+    overflow: visible; /* 境界線を表示するため */
+}
+
+.time-boundary .boundary-line-background {
+    position: absolute;
+    top: 50%;
+    left: -95px; /* todo-itemの左端まで */
+    width: calc(100% + 95px + var(--spacing-2xl)); /* 全幅に拡張 */
+    height: 2px;
+    background: repeating-linear-gradient(
+        to right,
+        var(--medium-gray) 0px,
+        var(--medium-gray) 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    opacity: 0.5;
+    z-index: 1; /* 後ろに配置 */
+    transform: translateY(-50%);
+}
+
+.time-boundary .boundary-label {
+    position: absolute;
+    top: 50%;
+    left: -95px; /* 左端から開始 */
+    transform: translateY(calc(-100% - 4px)); /* 点線の直上に配置 */
+    background: transparent; /* 背景を透明に */
+    padding: 0; /* パディングを削除 */
+    border-radius: 0; /* 角丸を削除 */
+    z-index: 2; /* 前に配置 */
+    box-shadow: none; /* シャドウを削除 */
+}
+
+.boundary-text {
+    font-size: 0.75em;
+    color: var(--medium-gray);
+    font-weight: 500;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+}
+
+/* メッセージ */
+.success-message,
+.error-message {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid;
+    display: none;
+    font-weight: 500;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.success-message.show,
+.error-message.show {
+    display: block;
+    animation: slideInFromTop 0.4s ease-out;
+}
+
+/* アニメーション */
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from { transform: translate(-50%, -60%); opacity: 0; }
+    to { transform: translate(-50%, -50%); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.todo-item {
+    animation: fadeIn 0.4s ease-out;
+}
+.todo-item-connection {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    body {
+        padding: var(--spacing-sm);
+    }
+    
+    .container {
+        border-radius: var(--radius-md);
+    }
+    
+    header {
+        padding: var(--spacing-lg);
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    main {
+        padding: var(--spacing-lg);
+    }
+    
+    .todo-list {
+        padding: var(--spacing-lg);
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: var(--spacing-lg);
+    }
+    
+    .modal form {
+        padding: var(--spacing-lg);
+    }
+    
+    .modal-header {
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+    
+    .todo-item,
+    .todo-item-connection {
+        padding: var(--spacing-md);
+        margin-left: 0; /* 幅いっぱいに表示 */
+        position: relative;
+        margin-top: calc(var(--spacing-md) / 2); /* 間隔を半分に */
+        margin-bottom: calc(var(--spacing-md) / 2); /* アイテム間の間隔を半分に */
+    }
+    
+    /* スマホでは枠外日付を非表示 */
+    .todo-date-external {
+        display: none;
+    }
+    
+    /* Todo枠内の日付表示（左下） */
+    .todo-date-internal {
+        display: block;
+        position: absolute;
+        bottom: var(--spacing-sm);
+        left: var(--spacing-sm);
+        background: rgba(102, 126, 234, 0.1);
+        color: var(--primary-color);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1;
+        z-index: 10;
+    }
+    
+    /* Todo接続と境界線も幅いっぱいに */
+    .todo-connection {
+        margin-left: 0;
+        width: 100%;
+        padding-bottom: calc(var(--spacing-md) / 2); /* パディングも半分に */
+    }
+    
+    .time-boundary {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    /* 境界線の背景を全幅に */
+    .todo-connection .boundary-line-background,
+    .time-boundary .boundary-line-background {
+        left: 0;
+        width: 100%;
+    }
+    
+    /* 境界ラベルを左端から配置 */
+    .todo-connection .boundary-label,
+    .time-boundary .boundary-label {
+        left: 0;
+    }
+    
+    /* スマホでは接続線の高さを半分に */
+    .connection-line {
+        height: 40px;
+    }
+    
+    .time-boundary {
+        height: 40px;
+    }
+    
+    .date-month {
+        font-size: 9px;
+        padding: 3px 0;
+    }
+    
+    .date-day {
+        font-size: 18px;
+    }
+    
+    .todo-details-location {
+        flex-direction: row;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
+    }
+    
+    .todo-details-location > div {
+        min-width: 60px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.85em;
+        flex: 1;
+    }
+    
+    .todo-arrow {
+        font-size: 1em;
+        flex: 0 0 auto;
+        min-width: 20px;
+    }
+    
+    .todo-actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        align-items: stretch;
+    }
+
+    .action-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .action-left {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        flex: 1;
+    }
+
+    .action-right {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        flex: 0 0 auto;
+    }
+
+    /* スマホでは編集ボタンを非表示 */
+    .edit-btn {
+        display: none;
+    }
+
+    /* スマホでは警告をaction-leftで非表示にする */
+    .action-left .warning-inline {
+        display: none;
+    }
+
+    /* スマホでは警告をaction-rightに表示（右寄せ） */
+    .action-right .warning-inline {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        color: white;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-md);
+        font-size: 11px;
+        font-weight: 600;
+        animation: warningPulse 2s ease-in-out infinite;
+        white-space: nowrap;
+        order: -1; /* 警告をステータス要素の前に表示 */
+    }
+    
+
+    
+    .status-group {
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .status-light {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .light-inner {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .connection-info {
+        min-width: 120px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-xs);
+        text-align: center;
+    }
+    
+    .stay-location {
+        font-size: 0.8em;
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+    
+    /* スマホでは「での滞在」テキストを非表示にして場所名のみ表示 */
+    .stay-location .mobile-hidden {
+        display: none;
+    }
+    
+    .stay-location .mobile-shown {
+        display: inline-block;
+        font-size: 0.8em;
+        font-weight: 600;
+        color: var(--primary-color);
+        white-space: nowrap;
+    }
+    
+    .stay-duration {
+        font-size: 0.7em;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --spacing-2xl: 24px;
+        --spacing-xl: 20px;
+        --spacing-lg: 16px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    .modal-content {
+        width: 98%;
+        max-height: 95vh;
+    }
+    
+    .modal form {
+        padding: var(--spacing-md);
+    }
+    
+    .modal-header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .modal-actions {
+        flex-direction: row;
+        gap: var(--spacing-sm);
+    }
+    
+    .modal-actions .delete-btn {
+        flex: 1;
+        min-width: auto;
+        order: 1;
+    }
+    
+    .cancel-btn {
+        order: 1;
+    }
+    
+    .register-btn {
+        flex: 2;
+        order: 2;
+    }
+    
+    .form-group select,
+    .form-group input {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 16px; /* iOS Safari のズーム防止 */
+    }
+    
+    /* ダイヤルボタンのモバイル対応 */
+    .date-input-group {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .dial-select-btn {
+        min-width: auto;
+        padding: var(--spacing-sm);
+        font-size: 14px;
+        align-self: center;
+        width: 100%;
+        max-width: 150px;
+    }
+    
+         .todo-details-location > div {
+         min-width: 50px;
+         font-size: 0.8em;
+         padding: var(--spacing-xs);
+     }
+     
+     /* 滞在ボックスの極小スクリーン対応 */
+     .connection-info {
+         min-width: 100px;
+         padding: var(--spacing-xs);
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         justify-content: center;
+         gap: 2px;
+         text-align: center;
+     }
+     
+     .stay-location {
+         margin-bottom: 0;
+         white-space: nowrap;
+     }
+     
+     .stay-location .mobile-shown {
+         font-size: 0.75em;
+         font-weight: 600;
+         color: var(--primary-color);
+         white-space: nowrap;
+         display: inline-block;
+     }
+     
+     .stay-duration {
+         font-size: 0.65em;
+         white-space: nowrap;
+     }
+     
+     /* アクション部分の極小スクリーン対応 */
+     .action-row {
+         gap: var(--spacing-xs);
+     }
+     
+     .action-left {
+         gap: var(--spacing-xs);
+     }
+     
+     .action-right {
+         gap: var(--spacing-xs);
+     }
+     
+     /* 極小スクリーンでも編集ボタンを非表示 */
+     .edit-btn {
+         display: none;
+     }
+     
+     /* 極小スクリーンでの警告表示 */
+     .action-left .warning-inline {
+         display: none;
+     }
+     
+     .action-right .warning-inline {
+         font-size: 10px;
+         padding: 2px var(--spacing-xs);
+         order: -1;
+     }
+     
+     .action-right .warning-inline .warning-text {
+         font-size: 9px;
+     }
+     
+     .status-text {
+         font-size: 10px;
+         padding: 2px var(--spacing-xs);
+     }
+     
+     .status-light {
+         width: 24px;
+         height: 24px;
+     }
+     
+     .light-inner {
+         width: 14px;
+         height: 14px;
+     }
+     
+     /* 枠外日付の極小スクリーン対応 */
+     .todo-item,
+     .todo-item-connection {
+         margin-left: 0; /* 幅いっぱいに表示 */
+         margin-top: calc(var(--spacing-md) / 2); /* 間隔を半分に */
+         margin-bottom: calc(var(--spacing-md) / 2); /* アイテム間の間隔を半分に */
+     }
+     
+     /* 極小スクリーンでも枠外日付を非表示 */
+     .todo-date-external {
+         display: none;
+     }
+     
+     /* Todo枠内の日付表示（極小スクリーン）*/
+     .todo-date-internal {
+         display: block;
+         font-size: 10px;
+         padding: 2px var(--spacing-xs);
+     }
+     
+     /* Todo接続と境界線も幅いっぱいに（極小スクリーン） */
+     .todo-connection {
+         margin-left: 0;
+         width: 100%;
+         padding-bottom: calc(var(--spacing-md) / 2); /* パディングも半分に */
+     }
+     
+     .time-boundary {
+         margin-left: 0;
+         width: 100%;
+     }
+     
+     /* 極小スクリーンでも接続線の高さを半分に */
+     .connection-line {
+         height: 40px;
+     }
+     
+     .time-boundary {
+         height: 40px;
+     }
+     
+     .date-month {
+         font-size: 8px;
+         padding: 2px 0;
+     }
+     
+     .date-day {
+         font-size: 16px;
+     }
+     
+         /* 今日の予約セクションのレスポンシブ */
+    .today-url-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .today-url-info {
+        min-width: auto;
+        text-align: center;
+    }
+    
+    .today-url-link {
+        align-self: center;
+        width: fit-content;
+    }
+
+    /* 履歴全削除ボタンのレスポンシブ */
+    .clear-history-btn {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: 14px;
+    }
+ }
+
+/* ダークモード対応（将来的な拡張のため） */
+@media (prefers-color-scheme: dark) {
+    /* ダークモードのスタイルは必要に応じて後で追加 */
+}
+
+/* 確認モーダル */
+.confirm-modal-content {
+    max-width: 400px;
+}
+
+.confirm-container {
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+
+.confirm-container p {
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1em;
+    color: var(--dark-gray);
+    line-height: 1.5;
+}
+
+/* 日付ダイヤルモーダル */
+.date-dial-content {
+    max-width: 500px;
+}
+
+.date-dial-container {
+    padding: var(--spacing-xl);
+}
+
+.current-date-display {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md);
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+}
+
+.current-date-display span {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.dial-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.dial-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dial-group label {
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9em;
+}
+
+.dial-wrapper {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+}
+
+.dial {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.dial::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dial::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+.dial::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.dial-items {
+    padding: 80px 0; /* 中央配置のためのパディング */
+}
+
+.dial-item {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--medium-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: var(--radius-sm);
+    margin: 2px var(--spacing-sm);
+}
+
+.dial-item:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--primary-color);
+}
+
+.dial-item.selected {
+    background: var(--primary-gradient);
+    color: white;
+    font-weight: 700;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 中央ハイライトライン */
+.dial-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 44px;
+    transform: translateY(-50%);
+    background: rgba(102, 126, 234, 0.1);
+    border-top: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .date-dial-content {
+        max-width: 95%;
+    }
+    
+    .dial-controls {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .dial-wrapper {
+        height: 150px;
+    }
+    
+    .dial-items {
+        padding: 60px 0;
+    }
+    
+    .dial-item {
+        height: 35px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .date-dial-container {
+        padding: var(--spacing-lg);
+    }
+    
+    .current-date-display span {
+        font-size: 1.2em;
+    }
+    
+    .dial-wrapper {
+        height: 120px;
+    }
+    
+    .dial-items {
+        padding: 40px 0;
+    }
+    
+    .dial-item {
+        height: 30px;
+        font-size: 0.9em;
+    }
+}
+
+/* 履歴全削除ボタン */
+.clear-history-section {
+    text-align: center;
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-xl);
+    border-top: 2px solid var(--border-color);
+}
+
+.clear-history-btn {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #c82333 100%);
+    color: white;
+    border: none !important;
+    outline: none !important;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.clear-history-btn:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.3), var(--shadow-md);
+}
+
+.clear-history-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.clear-history-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+}
+
+.clear-history-btn:hover::before {
+    left: 100%;
+}
+
+.clear-history-btn:active {
+    transform: translateY(-1px);
+}
+
+/* プリント用スタイル */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .add-todo-section,
+    .modal,
+    .clear-history-section {
+        display: none;
+    }
+    
+    .todo-actions {
+        display: none;
+    }
+}
