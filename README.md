@@ -128,7 +128,6 @@ open index.html # あるいはブラウザで開く
 - 通知機能（出発前にリマインド）  
 - iCloud/Google Drive 同期  
 - WebApp / PWA 化でホーム画面追加  
-- 予約番号や金額の管理
 
 ---
 
